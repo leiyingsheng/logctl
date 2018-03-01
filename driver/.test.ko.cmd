@@ -1,1 +1,1 @@
-cmd_/mnt/hgfs/share/logctl-master/driver/test.ko := ld -r -m elf_x86_64 -T ./scripts/module-common.lds --build-id  -o /mnt/hgfs/share/logctl-master/driver/test.ko /mnt/hgfs/share/logctl-master/driver/test.o /mnt/hgfs/share/logctl-master/driver/test.mod.o ;  true
+cmd_/mnt/hgfs/share/logctl/driver/test.ko := ld -r -m elf_x86_64 -T ./scripts/module-common.lds --build-id  -o /mnt/hgfs/share/logctl/driver/test.ko /mnt/hgfs/share/logctl/driver/test.o /mnt/hgfs/share/logctl/driver/test.mod.o ;  true

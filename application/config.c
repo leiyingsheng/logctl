@@ -3,7 +3,7 @@
 #define	CONFIG_FILE_PATH	"config.txt"
 
 int config_fd;
-struct config conf_init = {0,1048576,0};
+struct config conf_init = {0,10485761,0};
 
 /*
 *
@@ -13,6 +13,9 @@ struct config conf_init = {0,1048576,0};
 int init_config_file()
 {
 	int ret;
+	
+	
+	//检测是否存在，不存在则创建
 	ret = access(CONFIG_FILE_PATH,F_OK);
 	
 	if(ret == -1)
@@ -58,18 +61,17 @@ void close_config_file()
 */
 int write_config_file(struct config* conf)
 {
-	open_config_file(O_WRONLY);
 	
-	char str[30];
-	
-	memset(str,'\0',sizeof(str));
+	char str[33];
+	memset(str,'\0',sizeof(str));	
 	
 	sprintf(str,"%d\n%d\n%d\n",
 	conf->log_file_size,conf->log_file_max_size,conf->log_file_write_cur);
 	
-	write(config_fd,str,strlen(str));
-
+	//打开文件写入数据
+	open_config_file(O_WRONLY);
 	
+	write(config_fd,str,strlen(str));	
 	close_config_file();
 	
 	return 0;
@@ -82,20 +84,17 @@ int write_config_file(struct config* conf)
 */
 int read_config_file(struct config* conf)
 {
-	
-	char str[30];
-	
 	int n;
 	
+	char str[30];
 	memset(str,'\0',sizeof(str));
 	
 	open_config_file(O_RDONLY);
-	
-	
 	n = read(config_fd,str,sizeof(str));
 	
-	char* p;
 	
+	//读取config文件信息
+	char* p;
 	p = strtok(str,"\n");	
 	conf->log_file_size = atoi(p);
 	

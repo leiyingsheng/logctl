@@ -4,10 +4,14 @@
 #include <asm/uaccess.h>
 
 #define SIZE 100
-//MODULE_LICENSE("leo BSD/GPL");
+MODULE_LICENSE("leo BSD/GPL");
 
 int major = 0;
 
+/**
+*
+*open()函数
+*/
 
 int  drv_test_open(struct inode *inode, struct file *filp)
 {
@@ -16,7 +20,10 @@ int  drv_test_open(struct inode *inode, struct file *filp)
 	return 0;
 }
 
-
+/**
+*close()函数
+*
+*/
 int drv_test_release(struct inode *inode, struct file *filp)
 {
 	printk(KERN_ALERT "drv_test_release\n");
@@ -25,31 +32,19 @@ int drv_test_release(struct inode *inode, struct file *filp)
 }
 
 
-ssize_t drv_test_read (struct file *filp, char __user *buf, size_t count, loff_t *offset)
-{
-	int ret;
-	printk(KERN_ALERT "drv_test_read\n");
-
-
-	*offset  += count;
-	
-	return count;
-
-size_err:
-	printk(KERN_ALERT "read size Err \n");
-	return -EINVAL;	
-copy_to_user_err:
-	printk(KERN_ALERT "copy_to_user Failed\n");
-	return -EFAULT;	
-}
+/**
+*write()函数
+*
+*/
 
 
 ssize_t drv_test_write(struct file *filp, const char __user *buf, size_t count, loff_t *offset)
 {
-	printk(KERN_ALERT "%s",buf);
+	int ret = 0;
 	
-
-	return count;
+	printk(KERN_ALERT "%s",buf);
+	return ret;
+	
 }
 
 
@@ -57,8 +52,7 @@ struct file_operations   test_fops ={
 
 	.open = drv_test_open,
 	.release = drv_test_release,
-	.read = drv_test_read,
-
+	.write = drv_test_write,
 };
 
 
@@ -66,7 +60,7 @@ struct file_operations   test_fops ={
 int test_init(void)
 {
 	int ret = 0;
-	printk(KERN_ALERT "xxx_init\n");
+	printk(KERN_EMERG "test_init\n");
 
        major = register_chrdev(0,      //主设备号
                                           "drv_test",       //设备驱动名
@@ -81,7 +75,7 @@ int test_init(void)
 
 void test_exit(void)
 {
-	printk(KERN_ALERT "xxx_exit\n");
+	printk(KERN_ALERT "test_exit\n");
 
        unregister_chrdev(major,    //主设备号
                                        "drv_test");       //设备驱动名	
@@ -90,4 +84,3 @@ void test_exit(void)
 
 module_init(test_init);
 module_exit(test_exit);
-MODULE_LICENSE("GPL");
