@@ -6,6 +6,7 @@
 #define SIZE 100
 MODULE_LICENSE("leo BSD/GPL");
 
+int cnt = 0;
 int major = 0;
 
 /**
@@ -17,6 +18,8 @@ int  drv_test_open(struct inode *inode, struct file *filp)
 {
 	printk(KERN_ALERT "drv_test_open\n");
 
+	cnt = 0;
+	
 	return 0;
 }
 
@@ -27,6 +30,8 @@ int  drv_test_open(struct inode *inode, struct file *filp)
 int drv_test_release(struct inode *inode, struct file *filp)
 {
 	printk(KERN_ALERT "drv_test_release\n");
+	
+	cnt = 0;
 	
 	return 0;
 }
@@ -42,7 +47,10 @@ ssize_t drv_test_write(struct file *filp, const char __user *buf, size_t count, 
 {
 	int ret = 0;
 	
-	printk(KERN_ALERT "%s",buf);
+	cnt++;
+	
+	printk(KERN_ALERT "%d:%s\n",cnt,buf);
+	
 	return ret;
 	
 }
