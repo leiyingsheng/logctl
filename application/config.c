@@ -3,7 +3,7 @@
 #define	CONFIG_FILE_PATH	"config.txt"
 
 int config_fd;
-struct config conf_init = {0,10485761,0};
+struct config conf_init = {0,10485759,0};
 
 /*
 *

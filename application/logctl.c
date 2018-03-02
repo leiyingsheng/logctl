@@ -1,7 +1,6 @@
 #include "logctl.h"
 
 #define	LOG_FILE_PATH		"log.txt"
-#define FILE_SIZE_MAX		10485760
 #define DELIMITER			"\n"
 
 int log_fd,test_fd;
@@ -189,8 +188,8 @@ int write_log_file(struct config* conf)
 			n = write(log_fd,p,strlen(p));
 			write(log_fd,"\n",strlen("\n"));
 			
-//			n = write(test_fd,p,strlen(p));
-//			write(test_fd,"\n",strlen("\n"));
+			n = write(test_fd,p,strlen(p));
+			write(test_fd,"\n",strlen("\n"));
 			
 		}
 		
