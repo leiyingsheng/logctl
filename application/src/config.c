@@ -1,9 +1,10 @@
 #include"config.h"
 
 #define	CONFIG_FILE_PATH	"bin/config.txt"
+#define LOG_FILE_MAX_SIZE	10*1024*1024
 
 int config_fd;
-struct config conf_init = {0,10485759,0};
+struct config conf_init = {0,LOG_FILE_MAX_SIZE,0};
 
 /*
 *
