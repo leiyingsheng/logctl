@@ -65,7 +65,7 @@ int write_config_file(struct config* conf)
 	char str[33];
 	memset(str,'\0',sizeof(str));	
 	
-	sprintf(str,"%d\n%d\n%d\n",
+	sprintf(str,"%d\n%d\n%d",
 	conf->log_file_size,conf->log_file_max_size,conf->log_file_write_cur);
 	
 	//打开文件写入数据

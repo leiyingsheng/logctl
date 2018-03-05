@@ -17,6 +17,7 @@ int open_log_file(int mode);
 int close_log_file();
 int get_klog_info();
 int get_log_file_size();
-int write_log_file(struct config * conf);
+int sava_klog_info(struct config * conf);
+int write_log_file(char *buffer ,int len);
 
 #endif
