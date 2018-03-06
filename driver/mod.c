@@ -49,7 +49,7 @@ ssize_t drv_test_write(struct file *filp, const char __user *buf, size_t count, 
 	
 	cnt++;
 	
-	printk(KERN_ALERT "%d:%s\n",cnt,buf);
+	printk(KERN_ALERT "test_log:%d\n",cnt);
 	
 	return ret;
 	
@@ -67,7 +67,6 @@ struct file_operations   test_fops ={
 //模块装载函数
 int test_init(void)
 {
-	int ret = 0;
 	printk(KERN_EMERG "test_init\n");
 
        major = register_chrdev(0,      //主设备号
