@@ -215,6 +215,8 @@ int sava_klog_info(struct config* conf)
 			write_config_file(conf);
 		
 		}
+		
+		usleep(10000);
 	}
 	
 	return 0;
